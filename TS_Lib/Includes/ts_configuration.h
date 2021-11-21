@@ -94,8 +94,8 @@
 #if SUPPORT_KEY
 #define GENERATE_TS_KEY_EN						1			//根据KeysFlagSN状态产生触摸键消息TS_Key使能，如果不需要产生TS_Key，用户可直接根据KeysFlagSN来判断按键状态。
 #if GENERATE_TS_KEY_EN
-	#define GENERATE_DOUBLE_KEY_EN			0			//产生复合键
-	#define PRINT_TS_KEY_EN							0			//打印触摸按键值开关
+	#define GENERATE_DOUBLE_KEY_EN				0					//产生复合键
+	#define PRINT_TS_KEY_EN						0			//打印触摸按键值开关
 #endif
 
 /***********上电再盖上触摸面板功能操作开关定义*******************************************************************************************************/

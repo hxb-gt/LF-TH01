@@ -401,6 +401,11 @@
               <FileType>1</FileType>
               <FilePath>.\interrupt.c</FilePath>
             </File>
+            <File>
+              <FileName>wdt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\Sources\wdt.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -430,6 +435,31 @@
               <FileName>STARTUP.A51</FileName>
               <FileType>2</FileType>
               <FilePath>.\Library\Lib\STARTUP.A51</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>app</GroupName>
+          <Files>
+            <File>
+              <FileName>heater.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\heater.c</FilePath>
+            </File>
+            <File>
+              <FileName>heater.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\app\heater.h</FilePath>
+            </File>
+            <File>
+              <FileName>display.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\display.c</FilePath>
+            </File>
+            <File>
+              <FileName>menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\menu.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -19,7 +19,12 @@
 
 
 /*************************UART功能开关宏定义********************************************************************/
-// #define UART0_EN			//如果使用UART0，打开此宏定义
+//#define UART0_EN			//如果使用UART0，打开此宏定义
+//#define PRINT_EN
+
+#ifdef PRINT_EN
+	#define UART0_EN
+#endif
 
 #ifdef UART0_EN
 	#define UART0_BAUTRATE		115200

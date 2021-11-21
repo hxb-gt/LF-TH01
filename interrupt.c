@@ -15,10 +15,15 @@
 #include "TS_Lib\Includes\ts_api.h"
 #include "TS_Lib\Includes\ts_service.h"
 #include <intrins.h>
+
+#include "app/menu.h"
+#include "app/display.h"
+
 #if DEBUG
 #include "Library\Includes\i2c.h"		
 void I2C_ISR(void);
 #endif
+
 /*********************************************************************************************************************/
 extern unsigned char xdata TS_HalfSecCnt;
 void INT2_Handler (void) interrupt 4 
@@ -62,7 +67,19 @@ void INT3_ISR (void) interrupt 5
 		{
 			TmCnt = 0;
 			TS_HS_ISR();
+
+			tim_125ms++;
+			if (tim_125ms > TIM_125MS_CNT_MAX) { //每6分钟加1
+				tim_125ms = 0;
+				tim_360s++;
+				if (tim_360s > TIM_360S_CNT_MAX) {
+					tim_360s = 0;
+				}
+			}
 		}
+
+		//显示扫描
+		display_scan_show();
 	}
 #if SUPPORT_TOUCH_SLEEP_MODE	
 	if(TS_SleepMode)

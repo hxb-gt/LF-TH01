@@ -11,11 +11,17 @@
 #include "Library\Includes\tmc.h"	
 #include "includes\system.h"
 #include "Library\includes\wdt.h"
+#include "Library\includes\wdt.h"
+
 /*********************************************************************************************************************/
 #include "TS_Lib\Includes\ts_configuration.h"
 #include "TS_Lib\Includes\ts_def.h"
 #include "TS_Lib\Includes\ts_api.h"
 #include "TS_Lib\Includes\ts_service.h"
+
+#include "app/display.h"
+#include "app/menu.h"
+#include "app/heater.h"
 
 void Delay_ms(unsigned int n);
 /*********************************************************************************************************************/
@@ -52,21 +58,26 @@ void main(void)
 	Uart0_Initial(UART0_BAUTRATE);
 #endif
 
+
 //看门狗时钟源为IRCL
 	CKCON |= ILCKE;									//使能IRCL
-	WDCON  = WDTS(WDTS_IRCL) | WDRE(WDRE_reset);   	//设置看门狗时钟源为ILCKE，模式为复位模式
-	WDVTHH = 0;										//看门狗复位阈值高八位设置 当前值为5s	
-	WDVTHL = 75;									//看门狗复位阈值低八位设置
-	WDFLG = 0xA5;	
-	
+	Sys_Clk_Set_IRCL();
 	EA = 1;
+
+	heater_init();
+	display_init();
+	menu_init();
+	
+	WDT_init(WDTS_IRCL, WDRE_reset, 75);
+	WDT_FeedDog();
 
 	TS_init();		
 	
 	while(1)
 	{						
 		TS_Action();
-		
+
+		menu_loop(TS_Key);
 #if SUPPORT_WHEEL_SLIDER
 		if(WheelSliderPosition != -1)
 		{
